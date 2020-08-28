@@ -1,56 +1,69 @@
-**Title**
+**Create Face**
 ----
-  <_Additional information about your API call. Try to use verbs that match both request type (fetching vs modifying) and plurality (one vs multiple)._>
+  create a user and its face to identify 
 
 * **URL**
 
-  <_The URL Structure (path only, no root url)_>
+  /api/v1/faces
 
 * **Method:**
-  
-  <_The request type_>
 
-  `GET` | `POST` | `DELETE` | `PUT`
-  
-*  **URL Params**
-
-   <_If URL params exist, specify them in accordance with name mentioned in URL section. Separate into optional and required. Document data constraints._> 
-
-   **Required:**
- 
-   `id=[integer]`
-
-   **Optional:**
- 
-   `photo_id=[alphanumeric]`
+  `POST`
 
 * **Data Params**
 
-  <_If making a post request, what should the body payload look like? URL Params rules apply here too._>
 
-* **Success Response:**
-  
-  <_What should the status code be on success and is there any returned data? This is useful when people need to to know what their callbacks should expect!_>
-
-  * **Code:** 200 <br />
-    **Content:** `{ id : 12 }`
+   **Required:**
  
-* **Error Response:**
+   `name=[string]`
+   `image=[base64]`
 
-  <_Most endpoints will have many ways they can fail. From unauthorized access, to wrongful parameters etc. All of those should be liste d here. It might seem repetitive, but it helps prevent assumptions from being made where they should be._>
+   **Optional:**
+ 
+   `userId=[string]`
 
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "Log in" }`
+* **Success Response:** <br />
+  Success <br />
+  * **Code:** 200 <br />
+    **Content:** 
+    ```json
+      {
+        "code": 200,
+        "message": "OK",
+        "data": {
+          "id": "id_of_face_at_db",
+        }
+      }
+    ```
+ 
+  **OR** <br />
+  Faces do not exist in the image <br />
+  * **Code:** 200 <br />
+    **Content:** 
+    ```json
+      {
+        "code": "10000",
+        "message": "The image need has only a face"
+      }
+      ```
+  **OR** <br />
+  Invalid image <br />
+  * **Code:** 200 <br />
+    **Content:** 
+    ```json
+      {
+        "code": "9000",
+        "message": "The image is invalidate"
+      }
+    ```
+  **OR** <br />
+  Resize error <br />
+  * **Code:** 200 <br />
+    **Content:** 
+    ```json
+      {
+        "code": "10002",
+        "message": "Resize has error"
+      }
+    ```
 
-  OR
-
-  * **Code:** 422 UNPROCESSABLE ENTRY <br />
-    **Content:** `{ error : "Email Invalid" }`
-
-* **Sample Call:**
-
-  <_Just a sample call to your endpoint in a runnable format ($.ajax call or a curl request) - this makes life easier and more predictable._> 
-
-* **Notes:**
-
-  <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
