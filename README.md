@@ -23,7 +23,7 @@
    `userId=[string]`
 
 * **Success Response:** <br />
-  Success <br />
+  **Condition**: Success <br />
   * **Code:** 200 <br />
     **Content:** 
     ```json
@@ -37,7 +37,7 @@
     ```
  
   **OR** <br />
-  Faces do not exist in the image <br />
+  **Condition**: Faces do not exist in the image <br />
   * **Code:** 200 <br />
     **Content:** 
     ```json
@@ -47,7 +47,7 @@
       }
       ```
   **OR** <br />
-  Invalid image <br />
+  **Condition**: Invalid image <br />
   * **Code:** 200 <br />
     **Content:** 
     ```json
@@ -57,7 +57,7 @@
       }
     ```
   **OR** <br />
-  Resize error <br />
+  **Condition**: Resize error <br />
   * **Code:** 200 <br />
     **Content:** 
     ```json
@@ -86,7 +86,7 @@
    `image=[base64]`
 
 * **Success Response:** <br />
-  Success <br />
+  **Condition**: Success <br />
   * **Code:** 200 <br />
     **Content:** 
     ```json
@@ -102,7 +102,7 @@
     ```
  
   **OR** <br />
-  Faces do not exist in the image <br />
+  **Condition**: Faces do not exist in the image <br />
   * **Code:** 200 <br />
     **Content:** 
     ```json
@@ -112,7 +112,7 @@
       }
       ```
   **OR** <br />
-  Invalid image <br />
+  **Condition**: Invalid image <br />
   * **Code:** 200 <br />
     **Content:** 
     ```json
