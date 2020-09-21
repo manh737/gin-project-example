@@ -26,19 +26,31 @@ func main() {
 
 	server := gin.New()
 
+	server.Static("/static", "./templates/css")
+
+	server.LoadHTMLGlob("templates/*.html")
+
 	server.Use(gin.Recovery(), middlewares.Logger(), middlewares.BasicAuth())
 
-	server.GET("/videos", func(ctx *gin.Context) {
-		ctx.JSON(200, videoController.GetAll())
-	})
+	apiRouter := server.Group("/api")
+	{
+		apiRouter.GET("/videos", func(ctx *gin.Context) {
+			ctx.JSON(200, videoController.GetAll())
+		})
 
-	server.POST("/videos", func(ctx *gin.Context) {
-		if err := videoController.Save(ctx); err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		} else {
-			ctx.JSON(http.StatusOK, gin.H{"message": "Video input is valid!"})
-		}
-	})
+		apiRouter.POST("/videos", func(ctx *gin.Context) {
+			if err := videoController.Save(ctx); err != nil {
+				ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H{"message": "Video input is valid!"})
+			}
+		})
+	}
+
+	viewRouter := server.Group("/view")
+	{
+		viewRouter.GET("/video", videoController.ShowAll)
+	}
 
 	server.Run(":8088")
 }
